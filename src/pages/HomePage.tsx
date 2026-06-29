@@ -5,6 +5,7 @@ import TodayTasks from '../components/TodayTasks';
 import FixedTasks from '../components/FixedTasks';
 import Streak from '../components/Streak';
 import WeekGrid from '../components/WeekGrid';
+import ReminderBanner from '../components/ReminderBanner';
 import { useApp } from '../context/AppContext';
 import { getCurrentPhase } from '../utils/date';
 
@@ -66,6 +67,7 @@ export default function HomePage() {
         </div>
 
         <div className="space-y-3">
+          <ReminderBanner />
           <Countdown />
           <CurrentPhaseHeader />
           <TodayTasks />
