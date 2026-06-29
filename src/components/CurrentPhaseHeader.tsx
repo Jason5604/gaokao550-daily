@@ -6,25 +6,27 @@ export default function CurrentPhaseHeader() {
   const phase = getCurrentPhase(data.phases);
 
   return (
-    <div className="bg-white dark:bg-zinc-900 rounded-2xl px-6 py-5 shadow-[0_1px_3px_rgba(0,0,0,0.06)]">
-      <div className="text-[13px] text-zinc-400 dark:text-zinc-500 font-medium tracking-[0.02em]">当前阶段</div>
+    <div className="bg-white dark:bg-neutral-900 rounded-2xl px-6 py-5 shadow-[0_2px_8px_rgba(0,0,0,0.04)] dark:shadow-[0_2px_8px_rgba(0,0,0,0.2)]">
+      <p className="text-[11px] font-semibold text-stone-400 dark:text-stone-500 uppercase tracking-[0.1em] border-l-4 border-indigo-500 pl-3">
+        当前阶段
+      </p>
       {phase ? (
         <>
-          <div className="mt-1.5 text-xl font-bold text-zinc-900 dark:text-zinc-100">{phase.name}</div>
-          <div className="flex items-center gap-3 mt-2 text-[13px] text-zinc-400 dark:text-zinc-500">
-            <span>{phase.startDate.replace(/-/g, '.')} ~ {phase.endDate.replace(/-/g, '.')}</span>
-            <span className="w-[1px] h-3 bg-zinc-200 dark:bg-zinc-700" />
-            <span>Day {phaseDayNumber(phase)} / {phaseTotalDays(phase)}</span>
-          </div>
-          <div className="mt-3 h-[3px] bg-zinc-100 dark:bg-zinc-800 rounded-full overflow-hidden">
+          <h3 className="mt-3 text-lg font-bold text-stone-800 dark:text-stone-100">{phase.name}</h3>
+          <p className="mt-1 text-sm text-stone-400 dark:text-stone-500">
+            {phase.startDate.replace(/-/g, '.')} — {phase.endDate.replace(/-/g, '.')} &middot; Day {phaseDayNumber(phase)} / {phaseTotalDays(phase)}
+          </p>
+          <div className="mt-3 h-1.5 bg-stone-100 dark:bg-neutral-800 rounded-full overflow-hidden">
             <div
-              className="h-full bg-zinc-900 dark:bg-zinc-100 rounded-full transition-all duration-500"
+              className="h-full bg-gradient-to-r from-indigo-500 to-violet-500 rounded-full transition-all duration-500"
               style={{ width: `${Math.min(1, phaseDayNumber(phase) / phaseTotalDays(phase)) * 100}%` }}
             />
           </div>
         </>
       ) : (
-        <div className="mt-1.5 text-zinc-300 dark:text-zinc-600">未设置阶段 · Day {daysFromStart() + 1}</div>
+        <p className="mt-3 text-sm text-stone-400 dark:text-stone-500">
+          未设置阶段 &middot; Day {daysFromStart() + 1}
+        </p>
       )}
     </div>
   );

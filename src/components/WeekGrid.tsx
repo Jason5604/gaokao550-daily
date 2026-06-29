@@ -20,22 +20,27 @@ export default function WeekGrid() {
   const days = getLast7Days();
 
   return (
-    <div className="bg-white dark:bg-zinc-900 rounded-2xl px-6 py-5 shadow-[0_1px_3px_rgba(0,0,0,0.06)]">
-      <div className="text-[13px] text-zinc-400 dark:text-zinc-500 font-medium tracking-[0.02em] mb-4">最近七天</div>
+    <div className="bg-white dark:bg-neutral-900 rounded-2xl px-6 py-5 shadow-[0_2px_8px_rgba(0,0,0,0.04)] dark:shadow-[0_2px_8px_rgba(0,0,0,0.2)]">
+      <p className="text-[11px] font-semibold text-stone-400 dark:text-stone-500 uppercase tracking-[0.1em] border-l-4 border-indigo-500 pl-3 mb-4">
+        最近七天
+      </p>
       <div className="flex justify-between">
         {days.map((d) => {
           const status = dayStatus(d, data.dailyLogs[d]);
           const date = new Date(d + 'T12:00:00');
+          const isToday = d === new Date().toISOString().slice(0, 10);
           return (
             <div key={d} className="flex flex-col items-center gap-1.5">
-              <span className="text-[12px] text-zinc-400 dark:text-zinc-500 font-medium">{WEEKDAYS[date.getDay()]}</span>
-              <div className={`w-[36px] h-[36px] rounded-xl flex items-center justify-center transition-colors ${
-                status === 'full' ? 'bg-zinc-900 dark:bg-zinc-100' :
-                status === 'partial' ? 'bg-zinc-300 dark:bg-zinc-600' :
-                'bg-zinc-100 dark:bg-zinc-800'
-              }`}>
-                <span className={`text-sm font-semibold ${
-                  status !== 'none' ? 'text-white dark:text-zinc-900' : 'text-zinc-400 dark:text-zinc-600'
+              <span className="text-[11px] font-semibold text-stone-400 dark:text-stone-500">{WEEKDAYS[date.getDay()]}</span>
+              <div className={`w-9 h-9 rounded-xl flex items-center justify-center transition-colors ${
+                status === 'full' ? 'bg-indigo-500' :
+                status === 'partial' ? 'bg-indigo-200 dark:bg-indigo-800' :
+                'bg-stone-100 dark:bg-neutral-800'
+              } ${isToday ? 'ring-2 ring-indigo-300 dark:ring-indigo-600 ring-offset-2 ring-offset-white dark:ring-offset-neutral-900' : ''}`}>
+                <span className={`text-sm font-bold ${
+                  status === 'full' ? 'text-white' :
+                  status === 'partial' ? 'text-indigo-600 dark:text-indigo-300' :
+                  'text-stone-400 dark:text-stone-600'
                 }`}>
                   {date.getDate()}
                 </span>

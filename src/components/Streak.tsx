@@ -20,11 +20,15 @@ export default function Streak() {
   const streak = countStreak(data.dailyLogs as Record<string, unknown>);
 
   return (
-    <div className="bg-white dark:bg-zinc-900 rounded-2xl px-6 py-5 shadow-[0_1px_3px_rgba(0,0,0,0.06)]">
-      <div className="text-[13px] text-zinc-400 dark:text-zinc-500 font-medium tracking-[0.02em]">连续打卡</div>
-      <div className="mt-1.5 flex items-baseline gap-0.5">
-        <span className="text-[32px] font-bold text-zinc-900 dark:text-zinc-100 leading-none tabular-nums">{streak}</span>
-        <span className="text-sm text-zinc-400 dark:text-zinc-500 font-medium">天</span>
+    <div className="bg-white dark:bg-neutral-900 rounded-2xl px-6 py-5 shadow-[0_2px_8px_rgba(0,0,0,0.04)] dark:shadow-[0_2px_8px_rgba(0,0,0,0.2)] flex items-center gap-4">
+      <div className="w-10 h-10 rounded-xl bg-amber-50 dark:bg-amber-900/20 flex items-center justify-center text-lg flex-shrink-0">
+        🔥
+      </div>
+      <div>
+        <p className="text-[11px] font-semibold text-stone-400 dark:text-stone-500 uppercase tracking-[0.1em]">连续打卡</p>
+        <p className="mt-0.5 text-2xl font-bold text-stone-800 dark:text-stone-100 tabular-nums">
+          {streak}<span className="text-base font-medium text-stone-400 dark:text-stone-500"> 天</span>
+        </p>
       </div>
     </div>
   );

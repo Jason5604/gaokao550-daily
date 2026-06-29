@@ -17,35 +17,32 @@ function CompletionSummary() {
   const fixedCount = data.fixedTasks.filter(t => t.enabled).length;
   const total = phaseCount + fixedCount;
 
-  if (total === 0) {
-    return (
-      <div className="bg-white dark:bg-zinc-900 rounded-2xl px-6 py-5 shadow-[0_1px_3px_rgba(0,0,0,0.06)]">
-        <div className="text-[13px] text-zinc-400 dark:text-zinc-500 font-medium tracking-[0.02em]">今日完成</div>
-        <div className="mt-1.5 flex items-baseline gap-1">
-          <span className="text-[32px] font-bold text-zinc-900 dark:text-zinc-100 leading-none tabular-nums">0</span>
-          <span className="text-sm text-zinc-400 dark:text-zinc-500 font-medium">项</span>
-        </div>
-      </div>
-    );
-  }
-
   const phaseDone = log ? Object.values(log.phaseCompletions).filter(Boolean).length : 0;
   const fixedDone = log ? Object.values(log.fixedCompletions).filter(Boolean).length : 0;
   const done = phaseDone + fixedDone;
-  const pct = Math.round((done / total) * 100);
+  const pct = total > 0 ? Math.round((done / total) * 100) : 0;
 
   return (
-    <div className="bg-white dark:bg-zinc-900 rounded-2xl px-6 py-5 shadow-[0_1px_3px_rgba(0,0,0,0.06)]">
-      <div className="text-[13px] text-zinc-400 dark:text-zinc-500 font-medium tracking-[0.02em]">今日完成</div>
-      <div className="mt-1.5 flex items-baseline gap-1">
-        <span className="text-[32px] font-bold text-zinc-900 dark:text-zinc-100 leading-none tabular-nums">{done}</span>
-        <span className="text-sm text-zinc-400 dark:text-zinc-500 font-medium">/ {total}</span>
+    <div className="bg-white dark:bg-neutral-900 rounded-2xl px-6 py-5 shadow-[0_2px_8px_rgba(0,0,0,0.04)] dark:shadow-[0_2px_8px_rgba(0,0,0,0.2)] flex items-center gap-4">
+      <div className="w-10 h-10 rounded-xl bg-indigo-50 dark:bg-indigo-900/20 flex items-center justify-center text-lg flex-shrink-0">
+        {total > 0 ? `${pct}%` : '—'}
       </div>
-      <div className="mt-3 h-[3px] bg-zinc-100 dark:bg-zinc-800 rounded-full overflow-hidden">
-        <div
-          className="h-full bg-zinc-900 dark:bg-zinc-100 rounded-full transition-all duration-500"
-          style={{ width: `${pct}%` }}
-        />
+      <div className="flex-1 min-w-0">
+        <p className="text-[11px] font-semibold text-stone-400 dark:text-stone-500 uppercase tracking-[0.1em]">今日完成</p>
+        <div className="flex items-baseline gap-1 mt-0.5">
+          <span className="text-2xl font-bold text-stone-800 dark:text-stone-100 tabular-nums">{done}</span>
+          {total > 0 && (
+            <span className="text-sm font-medium text-stone-400 dark:text-stone-500">/ {total}</span>
+          )}
+        </div>
+        {total > 0 && (
+          <div className="mt-2 h-1 bg-stone-100 dark:bg-neutral-800 rounded-full overflow-hidden">
+            <div
+              className="h-full bg-gradient-to-r from-indigo-500 to-violet-500 rounded-full transition-all duration-500"
+              style={{ width: `${pct}%` }}
+            />
+          </div>
+        )}
       </div>
     </div>
   );
@@ -55,20 +52,31 @@ export default function HomePage() {
   const navigate = useNavigate();
 
   return (
-    <div className="max-w-md mx-auto px-4 pb-8 pt-3 space-y-3">
-      <div className="flex items-center justify-between mb-1 px-0.5">
-        <h1 className="text-lg font-bold text-zinc-900 dark:text-zinc-100 tracking-tight">Gaokao550</h1>
-        <button onClick={() => navigate('/edit')} className="text-sm text-zinc-400 dark:text-zinc-500 hover:text-zinc-600 dark:hover:text-zinc-300 transition-colors font-medium">编辑计划</button>
+    <div className="min-h-screen bg-stone-50 dark:bg-neutral-950">
+      <div className="max-w-md mx-auto px-4 pb-10">
+        {/* Header */}
+        <div className="flex items-center justify-between pt-5 pb-4 px-1">
+          <div>
+            <h1 className="text-lg font-bold text-stone-800 dark:text-stone-100 tracking-tight">高考打卡</h1>
+            <p className="text-xs text-stone-400 dark:text-stone-500 mt-0.5">Gaokao550 Daily</p>
+          </div>
+          <button onClick={() => navigate('/edit')} className="text-xs font-semibold text-indigo-500 hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors">
+            编辑计划
+          </button>
+        </div>
+
+        <div className="space-y-3">
+          <Countdown />
+          <CurrentPhaseHeader />
+          <TodayTasks />
+          <FixedTasks />
+          <div className="grid grid-cols-2 gap-3">
+            <CompletionSummary />
+            <Streak />
+          </div>
+          <WeekGrid />
+        </div>
       </div>
-      <Countdown />
-      <CurrentPhaseHeader />
-      <TodayTasks />
-      <FixedTasks />
-      <div className="grid grid-cols-2 gap-3">
-        <CompletionSummary />
-        <Streak />
-      </div>
-      <WeekGrid />
     </div>
   );
 }
