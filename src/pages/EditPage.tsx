@@ -90,8 +90,15 @@ function PhaseEditor({ phase }: { phase: Phase }) {
 
 export default function EditPage() {
   const navigate = useNavigate();
-  const { data, addPhase } = useApp();
+  const { data, addPhase, refresh } = useApp();
   const [showAdd, setShowAdd] = useState(false);
+  const [confirmReset, setConfirmReset] = useState(false);
+
+  function handleReset() {
+    localStorage.removeItem('gaokao550');
+    refresh();
+    setConfirmReset(false);
+  }
   const [newName, setNewName] = useState('');
   const [newStart, setNewStart] = useState('');
   const [newEnd, setNewEnd] = useState('');
@@ -165,6 +172,19 @@ export default function EditPage() {
         </div>
       )}
       <button onClick={() => setShowAdd(true)} className="mt-3 w-full py-3 text-sm rounded-2xl border-2 border-dashed border-zinc-200 dark:border-zinc-700 text-zinc-400 dark:text-zinc-500 hover:border-zinc-400 dark:hover:border-zinc-500 transition-colors">+ 新增阶段</button>
+
+      <div className="mt-8 pt-6 border-t border-zinc-100 dark:border-zinc-800">
+        {confirmReset ? (
+          <div className="flex gap-2">
+            <button onClick={handleReset} className="flex-1 py-2.5 text-sm rounded-xl bg-red-500 text-white hover:bg-red-600 transition-colors">确认清除</button>
+            <button onClick={() => setConfirmReset(false)} className="flex-1 py-2.5 text-sm rounded-xl border border-zinc-200 dark:border-zinc-700 text-zinc-600 dark:text-zinc-400 hover:bg-zinc-50 dark:hover:bg-zinc-800 transition-colors">取消</button>
+          </div>
+        ) : (
+          <button onClick={() => setConfirmReset(true)} className="w-full py-2.5 text-sm rounded-xl border border-red-200 dark:border-red-900 text-red-400 hover:bg-red-50 dark:hover:bg-red-950 transition-colors">
+            清除所有打卡数据
+          </button>
+        )}
+      </div>
     </div>
   );
 }
