@@ -9,6 +9,7 @@ export interface Phase {
 export interface FixedTask {
   id: string;
   label: string;
+  enabled: boolean;
 }
 
 export interface DayLog {

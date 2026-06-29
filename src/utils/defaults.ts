@@ -28,9 +28,9 @@ export const DEFAULT_PHASES: Phase[] = [
 ];
 
 export const DEFAULT_FIXED_TASKS: FixedTask[] = [
-  { id: 'eng-reading', label: '英语阅读' },
-  { id: 'eng-words', label: '背单词' },
-  { id: 'eng-writing', label: '作文/读后续写' },
-  { id: 'chn-reading', label: '语文阅读' },
-  { id: 'chn-writing', label: '作文素材/模板' },
+  { id: 'eng-reading', label: '英语阅读', enabled: true },
+  { id: 'eng-words', label: '背单词', enabled: true },
+  { id: 'eng-writing', label: '作文/读后续写', enabled: true },
+  { id: 'chn-reading', label: '语文阅读', enabled: true },
+  { id: 'chn-writing', label: '作文素材/模板', enabled: true },
 ];

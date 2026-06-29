@@ -1,7 +1,11 @@
-import type { AppData } from '../types';
+import type { AppData, FixedTask } from '../types';
 import { DEFAULT_PHASES, DEFAULT_FIXED_TASKS } from './defaults';
 
 const KEY = 'gaokao550';
+
+function ensureEnabled(tasks: FixedTask[]): FixedTask[] {
+  return tasks.map(t => ({ ...t, enabled: t.enabled ?? true }));
+}
 
 function defaultData(): AppData {
   return {
@@ -18,7 +22,7 @@ export function loadData(): AppData {
       const d = JSON.parse(raw);
       return {
         phases: Array.isArray(d.phases) ? d.phases : defaultData().phases,
-        fixedTasks: Array.isArray(d.fixedTasks) ? d.fixedTasks : defaultData().fixedTasks,
+        fixedTasks: Array.isArray(d.fixedTasks) ? ensureEnabled(d.fixedTasks) : defaultData().fixedTasks,
         dailyLogs: d.dailyLogs || {},
       };
     }

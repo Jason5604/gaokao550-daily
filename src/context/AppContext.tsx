@@ -13,6 +13,7 @@ interface AppContextType {
   addFixedTask: (label: string) => void;
   removeFixedTask: (id: string) => void;
   updateFixedTask: (id: string, label: string) => void;
+  toggleFixedTaskEnabled: (id: string) => void;
   togglePhaseTask: (taskName: string) => void;
   toggleFixedTask: (taskId: string) => void;
   getDayLog: (date: string) => DayLog | undefined;
@@ -58,7 +59,7 @@ export function AppProvider({ children }: { children: ReactNode }) {
   const addFixedTask = useCallback((label: string) => {
     setData(prev => ({
       ...prev,
-      fixedTasks: [...prev.fixedTasks, { id: genId(), label }],
+      fixedTasks: [...prev.fixedTasks, { id: genId(), label, enabled: true }],
     }));
   }, []);
 
@@ -73,6 +74,13 @@ export function AppProvider({ children }: { children: ReactNode }) {
     setData(prev => ({
       ...prev,
       fixedTasks: prev.fixedTasks.map(t => (t.id === id ? { ...t, label } : t)),
+    }));
+  }, []);
+
+  const toggleFixedTaskEnabled = useCallback((id: string) => {
+    setData(prev => ({
+      ...prev,
+      fixedTasks: prev.fixedTasks.map(t => (t.id === id ? { ...t, enabled: !t.enabled } : t)),
     }));
   }, []);
 
@@ -106,7 +114,12 @@ export function AppProvider({ children }: { children: ReactNode }) {
   }, []);
 
   return (
-    <AppContext.Provider value={{ data, refresh, addPhase, updatePhase, deletePhase, reorderPhases, addFixedTask, removeFixedTask, updateFixedTask, togglePhaseTask, toggleFixedTask, getDayLog }}>
+    <AppContext.Provider value={{
+      data, refresh,
+      addPhase, updatePhase, deletePhase, reorderPhases,
+      addFixedTask, removeFixedTask, updateFixedTask, toggleFixedTaskEnabled,
+      togglePhaseTask, toggleFixedTask, getDayLog,
+    }}>
       {children}
     </AppContext.Provider>
   );

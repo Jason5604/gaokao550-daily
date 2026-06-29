@@ -22,10 +22,10 @@ export default function Streak() {
 
   return (
     <div className="rounded-2xl bg-white dark:bg-zinc-900 p-5 shadow-sm border border-zinc-100 dark:border-zinc-800">
-      <div className="text-xs text-zinc-400 dark:text-zinc-500 mb-1">连续打卡</div>
-      <div className="text-2xl font-bold text-zinc-900 dark:text-zinc-100 tabular-nums">
-        {streak}
-        <span className="text-sm font-normal text-zinc-400 dark:text-zinc-500 ml-1">天</span>
+      <div className="text-xs text-zinc-400 dark:text-zinc-500 mb-1 font-medium">连续打卡</div>
+      <div className="flex items-baseline gap-1">
+        <span className="text-3xl font-bold text-zinc-900 dark:text-zinc-100 tabular-nums">{streak}</span>
+        <span className="text-sm text-zinc-400 dark:text-zinc-500">天</span>
       </div>
     </div>
   );
