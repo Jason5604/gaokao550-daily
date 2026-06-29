@@ -31,16 +31,16 @@ function PhaseEditor({ phase }: { phase: Phase }) {
 
   if (!editing) {
     return (
-      <div className="rounded-2xl bg-white dark:bg-zinc-900 p-5 shadow-sm border border-zinc-100 dark:border-zinc-800">
+      <div className="bg-white dark:bg-zinc-900 rounded-2xl px-6 py-5 shadow-[0_1px_3px_rgba(0,0,0,0.06)]">
         <div className="flex items-start justify-between">
           <div>
             <div className="font-semibold text-zinc-900 dark:text-zinc-100">{phase.name}</div>
-            <div className="text-xs text-zinc-400 dark:text-zinc-500 mt-1">{phase.startDate.replace(/-/g, '.')} ~ {phase.endDate.replace(/-/g, '.')}</div>
-            <div className="text-xs text-zinc-400 dark:text-zinc-500 mt-1">{phase.tasks.join(' · ')}</div>
+            <div className="text-[13px] text-zinc-400 dark:text-zinc-500 mt-1">{phase.startDate.replace(/-/g, '.')} ~ {phase.endDate.replace(/-/g, '.')}</div>
+            <div className="text-[13px] text-zinc-300 dark:text-zinc-600 mt-0.5">{phase.tasks.join(' · ')}</div>
           </div>
           <div className="flex gap-2 flex-shrink-0">
-            <button onClick={() => setEditing(true)} className="text-xs text-zinc-400 hover:text-zinc-600 dark:hover:text-zinc-300">编辑</button>
-            <button onClick={() => deletePhase(phase.id)} className="text-xs text-red-400 hover:text-red-600">删除</button>
+            <button onClick={() => setEditing(true)} className="text-xs text-zinc-400 hover:text-zinc-600 dark:hover:text-zinc-300 font-medium">编辑</button>
+            <button onClick={() => deletePhase(phase.id)} className="text-xs text-red-400 hover:text-red-600 font-medium">删除</button>
           </div>
         </div>
       </div>
@@ -48,20 +48,20 @@ function PhaseEditor({ phase }: { phase: Phase }) {
   }
 
   return (
-    <div className="rounded-2xl bg-white dark:bg-zinc-900 p-5 shadow-sm border border-zinc-100 dark:border-zinc-800">
+    <div className="bg-white dark:bg-zinc-900 rounded-2xl px-6 py-5 shadow-[0_1px_3px_rgba(0,0,0,0.06)]">
       <div className="space-y-3">
         <div>
           <label className="text-xs text-zinc-400 dark:text-zinc-500 font-medium">阶段名称</label>
-          <input value={name} onChange={e => setName(e.target.value)} className="w-full mt-1 px-3 py-2 text-sm rounded-xl border border-zinc-200 dark:border-zinc-700 bg-white dark:bg-zinc-800 text-zinc-900 dark:text-zinc-100 focus:outline-none focus:ring-2 focus:ring-violet-200 dark:focus:ring-violet-800" />
+          <input value={name} onChange={e => setName(e.target.value)} className="w-full mt-1 px-3 py-2 text-sm rounded-xl border border-zinc-200 dark:border-zinc-700 bg-white dark:bg-zinc-800 text-zinc-900 dark:text-zinc-100 focus:outline-none focus:ring-2 focus:ring-zinc-200 dark:focus:ring-zinc-700" />
         </div>
         <div className="flex gap-3">
           <div className="flex-1">
             <label className="text-xs text-zinc-400 dark:text-zinc-500 font-medium">开始日期</label>
-            <input type="date" value={start} onChange={e => setStart(e.target.value)} className="w-full mt-1 px-3 py-2 text-sm rounded-xl border border-zinc-200 dark:border-zinc-700 bg-white dark:bg-zinc-800 text-zinc-900 dark:text-zinc-100 focus:outline-none focus:ring-2 focus:ring-violet-200 dark:focus:ring-violet-800" />
+            <input type="date" value={start} onChange={e => setStart(e.target.value)} className="w-full mt-1 px-3 py-2 text-sm rounded-xl border border-zinc-200 dark:border-zinc-700 bg-white dark:bg-zinc-800 text-zinc-900 dark:text-zinc-100 focus:outline-none focus:ring-2 focus:ring-zinc-200 dark:focus:ring-zinc-700" />
           </div>
           <div className="flex-1">
             <label className="text-xs text-zinc-400 dark:text-zinc-500 font-medium">结束日期</label>
-            <input type="date" value={end} onChange={e => setEnd(e.target.value)} className="w-full mt-1 px-3 py-2 text-sm rounded-xl border border-zinc-200 dark:border-zinc-700 bg-white dark:bg-zinc-800 text-zinc-900 dark:text-zinc-100 focus:outline-none focus:ring-2 focus:ring-violet-200 dark:focus:ring-violet-800" />
+            <input type="date" value={end} onChange={e => setEnd(e.target.value)} className="w-full mt-1 px-3 py-2 text-sm rounded-xl border border-zinc-200 dark:border-zinc-700 bg-white dark:bg-zinc-800 text-zinc-900 dark:text-zinc-100 focus:outline-none focus:ring-2 focus:ring-zinc-200 dark:focus:ring-zinc-700" />
           </div>
         </div>
         <div>
@@ -75,7 +75,7 @@ function PhaseEditor({ phase }: { phase: Phase }) {
             ))}
           </div>
           <div className="flex gap-2 mt-2">
-            <input value={newTask} onChange={e => setNewTask(e.target.value)} onKeyDown={e => e.key === 'Enter' && addTask()} placeholder="添加任务" className="flex-1 px-3 py-1.5 text-sm rounded-xl border border-zinc-200 dark:border-zinc-700 bg-white dark:bg-zinc-800 text-zinc-900 dark:text-zinc-100 focus:outline-none focus:ring-2 focus:ring-violet-200 dark:focus:ring-violet-800" />
+            <input value={newTask} onChange={e => setNewTask(e.target.value)} onKeyDown={e => e.key === 'Enter' && addTask()} placeholder="添加任务" className="flex-1 px-3 py-1.5 text-sm rounded-xl border border-zinc-200 dark:border-zinc-700 bg-white dark:bg-zinc-800 text-zinc-900 dark:text-zinc-100 focus:outline-none focus:ring-2 focus:ring-zinc-200 dark:focus:ring-zinc-700" />
             <button onClick={addTask} className="px-3 py-1.5 text-sm rounded-xl bg-zinc-900 dark:bg-zinc-100 text-white dark:text-zinc-900 hover:bg-zinc-800 dark:hover:bg-zinc-200 transition-colors font-medium">添加</button>
           </div>
         </div>
@@ -101,16 +101,13 @@ function FixedTaskManager() {
   }
 
   return (
-    <div className="rounded-2xl bg-white dark:bg-zinc-900 p-5 shadow-sm border border-zinc-100 dark:border-zinc-800">
-      <div className="flex items-center gap-2 mb-3">
-        <div className="w-2 h-2 rounded-full bg-amber-400" />
-        <span className="text-xs text-zinc-400 dark:text-zinc-500 font-medium">每日固定任务</span>
-      </div>
+    <div className="bg-white dark:bg-zinc-900 rounded-2xl px-6 py-5 shadow-[0_1px_3px_rgba(0,0,0,0.06)]">
+      <div className="text-[13px] text-zinc-400 dark:text-zinc-500 font-medium tracking-[0.02em] mb-3">每日固定任务</div>
       <div className="space-y-1 mb-3">
         {data.fixedTasks.map(t => (
           <div key={t.id} className="flex items-center gap-2 px-3 py-2 rounded-xl bg-zinc-50 dark:bg-zinc-800/50">
-            <button onClick={() => toggleFixedTaskEnabled(t.id)} className={`text-xs font-medium px-2 py-0.5 rounded-full transition-colors ${t.enabled ? 'bg-emerald-100 text-emerald-700 dark:bg-emerald-900/50 dark:text-emerald-300' : 'bg-zinc-200 text-zinc-400 dark:bg-zinc-700 dark:text-zinc-500'}`}>
-              {t.enabled ? '开启' : '关闭'}
+            <button onClick={() => toggleFixedTaskEnabled(t.id)} className={`text-[11px] font-medium px-2 py-0.5 rounded-md transition-colors ${t.enabled ? 'bg-zinc-200 text-zinc-700 dark:bg-zinc-700 dark:text-zinc-300' : 'bg-zinc-100 text-zinc-400 dark:bg-zinc-800 dark:text-zinc-600'}`}>
+              {t.enabled ? '开' : '关'}
             </button>
             <span className={`text-sm flex-1 ${t.enabled ? 'text-zinc-800 dark:text-zinc-200' : 'text-zinc-300 dark:text-zinc-600 line-through'}`}>
               {t.label}
@@ -123,7 +120,7 @@ function FixedTaskManager() {
         )}
       </div>
       <div className="flex gap-2">
-        <input value={newLabel} onChange={e => setNewLabel(e.target.value)} onKeyDown={e => e.key === 'Enter' && handleAdd()} placeholder="添加固定任务" className="flex-1 px-3 py-1.5 text-sm rounded-xl border border-zinc-200 dark:border-zinc-700 bg-white dark:bg-zinc-800 text-zinc-900 dark:text-zinc-100 focus:outline-none focus:ring-2 focus:ring-amber-200 dark:focus:ring-amber-800" />
+        <input value={newLabel} onChange={e => setNewLabel(e.target.value)} onKeyDown={e => e.key === 'Enter' && handleAdd()} placeholder="添加固定任务" className="flex-1 px-3 py-1.5 text-sm rounded-xl border border-zinc-200 dark:border-zinc-700 bg-white dark:bg-zinc-800 text-zinc-900 dark:text-zinc-100 focus:outline-none focus:ring-2 focus:ring-zinc-200 dark:focus:ring-zinc-700" />
         <button onClick={handleAdd} className="px-3 py-1.5 text-sm rounded-xl bg-zinc-900 dark:bg-zinc-100 text-white dark:text-zinc-900 hover:bg-zinc-800 dark:hover:bg-zinc-200 transition-colors font-medium">添加</button>
       </div>
     </div>
@@ -177,28 +174,25 @@ export default function EditPage() {
         <FixedTaskManager />
 
         {/* Phase List */}
-        <div className="flex items-center gap-2 mt-6 mb-1 px-0.5">
-          <div className="w-2 h-2 rounded-full bg-violet-400" />
-          <span className="text-xs text-zinc-400 dark:text-zinc-500 font-medium">学习阶段</span>
-        </div>
+        <div className="text-[13px] text-zinc-400 dark:text-zinc-500 font-medium tracking-[0.02em] mt-6 mb-3 px-0.5">学习阶段</div>
         {data.phases.map((p) => (<PhaseEditor key={p.id} phase={p} />))}
       </div>
 
       {showAdd && (
-        <div className="mt-3 rounded-2xl bg-white dark:bg-zinc-900 p-5 shadow-sm border border-zinc-100 dark:border-zinc-800">
+        <div className="mt-3 bg-white dark:bg-zinc-900 rounded-2xl px-6 py-5 shadow-[0_1px_3px_rgba(0,0,0,0.06)]">
           <div className="space-y-3">
             <div>
               <label className="text-xs text-zinc-400 dark:text-zinc-500 font-medium">阶段名称</label>
-              <input value={newName} onChange={e => setNewName(e.target.value)} placeholder="例如：数学基础阶段" className="w-full mt-1 px-3 py-2 text-sm rounded-xl border border-zinc-200 dark:border-zinc-700 bg-white dark:bg-zinc-800 text-zinc-900 dark:text-zinc-100 focus:outline-none focus:ring-2 focus:ring-violet-200 dark:focus:ring-violet-800" />
+              <input value={newName} onChange={e => setNewName(e.target.value)} placeholder="例如：数学基础阶段" className="w-full mt-1 px-3 py-2 text-sm rounded-xl border border-zinc-200 dark:border-zinc-700 bg-white dark:bg-zinc-800 text-zinc-900 dark:text-zinc-100 focus:outline-none focus:ring-2 focus:ring-zinc-200 dark:focus:ring-zinc-700" />
             </div>
             <div className="flex gap-3">
               <div className="flex-1">
                 <label className="text-xs text-zinc-400 dark:text-zinc-500 font-medium">开始日期</label>
-                <input type="date" value={newStart} onChange={e => setNewStart(e.target.value)} className="w-full mt-1 px-3 py-2 text-sm rounded-xl border border-zinc-200 dark:border-zinc-700 bg-white dark:bg-zinc-800 text-zinc-900 dark:text-zinc-100 focus:outline-none focus:ring-2 focus:ring-violet-200 dark:focus:ring-violet-800" />
+                <input type="date" value={newStart} onChange={e => setNewStart(e.target.value)} className="w-full mt-1 px-3 py-2 text-sm rounded-xl border border-zinc-200 dark:border-zinc-700 bg-white dark:bg-zinc-800 text-zinc-900 dark:text-zinc-100 focus:outline-none focus:ring-2 focus:ring-zinc-200 dark:focus:ring-zinc-700" />
               </div>
               <div className="flex-1">
                 <label className="text-xs text-zinc-400 dark:text-zinc-500 font-medium">结束日期</label>
-                <input type="date" value={newEnd} onChange={e => setNewEnd(e.target.value)} className="w-full mt-1 px-3 py-2 text-sm rounded-xl border border-zinc-200 dark:border-zinc-700 bg-white dark:bg-zinc-800 text-zinc-900 dark:text-zinc-100 focus:outline-none focus:ring-2 focus:ring-violet-200 dark:focus:ring-violet-800" />
+                <input type="date" value={newEnd} onChange={e => setNewEnd(e.target.value)} className="w-full mt-1 px-3 py-2 text-sm rounded-xl border border-zinc-200 dark:border-zinc-700 bg-white dark:bg-zinc-800 text-zinc-900 dark:text-zinc-100 focus:outline-none focus:ring-2 focus:ring-zinc-200 dark:focus:ring-zinc-700" />
               </div>
             </div>
             <div>
@@ -212,7 +206,7 @@ export default function EditPage() {
                 ))}
               </div>
               <div className="flex gap-2 mt-2">
-                <input value={newTaskInput} onChange={e => setNewTaskInput(e.target.value)} onKeyDown={e => e.key === 'Enter' && addNewTask()} placeholder="添加任务" className="flex-1 px-3 py-1.5 text-sm rounded-xl border border-zinc-200 dark:border-zinc-700 bg-white dark:bg-zinc-800 text-zinc-900 dark:text-zinc-100 focus:outline-none focus:ring-2 focus:ring-violet-200 dark:focus:ring-violet-800" />
+                <input value={newTaskInput} onChange={e => setNewTaskInput(e.target.value)} onKeyDown={e => e.key === 'Enter' && addNewTask()} placeholder="添加任务" className="flex-1 px-3 py-1.5 text-sm rounded-xl border border-zinc-200 dark:border-zinc-700 bg-white dark:bg-zinc-800 text-zinc-900 dark:text-zinc-100 focus:outline-none focus:ring-2 focus:ring-zinc-200 dark:focus:ring-zinc-700" />
                 <button onClick={addNewTask} className="px-3 py-1.5 text-sm rounded-xl bg-zinc-900 dark:bg-zinc-100 text-white dark:text-zinc-900 hover:bg-zinc-800 dark:hover:bg-zinc-200 transition-colors font-medium">添加</button>
               </div>
             </div>

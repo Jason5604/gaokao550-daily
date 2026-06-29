@@ -5,24 +5,20 @@ export default function Countdown() {
   const progress = overallProgress();
 
   return (
-    <div className="rounded-2xl bg-gradient-to-br from-zinc-900 to-zinc-800 dark:from-zinc-800 dark:to-zinc-900 p-6 shadow-lg">
-      <div className="text-xs text-zinc-400 mb-1 font-medium tracking-wide">距离高考</div>
-      <div className="text-5xl font-bold text-white tabular-nums tracking-tight">
-        {days}
-        <span className="text-xl font-normal text-zinc-400 ml-1">天</span>
+    <div className="bg-white dark:bg-zinc-900 rounded-2xl px-6 py-6 shadow-[0_1px_3px_rgba(0,0,0,0.06)]">
+      <div className="text-[13px] text-zinc-400 dark:text-zinc-500 font-medium tracking-[0.02em]">距离高考</div>
+      <div className="mt-1 flex items-baseline gap-1">
+        <span className="text-[56px] font-bold text-zinc-900 dark:text-zinc-100 leading-none tracking-tight tabular-nums">{days}</span>
+        <span className="text-lg text-zinc-400 dark:text-zinc-500 font-medium">天</span>
       </div>
-      <div className="mt-4 h-2 bg-zinc-700 rounded-full overflow-hidden">
+      <div className="mt-5 h-[3px] bg-zinc-100 dark:bg-zinc-800 rounded-full overflow-hidden">
         <div
-          className="h-full rounded-full transition-all duration-700 ease-out"
-          style={{
-            width: `${progress * 100}%`,
-            background: 'linear-gradient(90deg, #a78bfa, #60a5fa, #34d399)',
-          }}
+          className="h-full bg-zinc-900 dark:bg-zinc-100 rounded-full transition-all duration-700 ease-out"
+          style={{ width: `${progress * 100}%` }}
         />
       </div>
-      <div className="mt-1.5 flex justify-between text-xs text-zinc-500">
-        <span>已过 {Math.round(progress * 343)} 天</span>
-        <span>{Math.round(progress * 100)}%</span>
+      <div className="mt-2 text-[13px] text-zinc-300 dark:text-zinc-600 font-medium">
+        {Math.round(progress * 100)}%
       </div>
     </div>
   );

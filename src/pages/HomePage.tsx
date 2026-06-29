@@ -19,11 +19,11 @@ function CompletionSummary() {
 
   if (total === 0) {
     return (
-      <div className="rounded-2xl bg-white dark:bg-zinc-900 p-5 shadow-sm border border-zinc-100 dark:border-zinc-800">
-        <div className="text-xs text-zinc-400 dark:text-zinc-500 mb-1 font-medium">今日完成</div>
-        <div className="flex items-baseline gap-1">
-          <span className="text-3xl font-bold text-zinc-900 dark:text-zinc-100">0</span>
-          <span className="text-sm text-zinc-400 dark:text-zinc-500">项</span>
+      <div className="bg-white dark:bg-zinc-900 rounded-2xl px-6 py-5 shadow-[0_1px_3px_rgba(0,0,0,0.06)]">
+        <div className="text-[13px] text-zinc-400 dark:text-zinc-500 font-medium tracking-[0.02em]">今日完成</div>
+        <div className="mt-1.5 flex items-baseline gap-1">
+          <span className="text-[32px] font-bold text-zinc-900 dark:text-zinc-100 leading-none tabular-nums">0</span>
+          <span className="text-sm text-zinc-400 dark:text-zinc-500 font-medium">项</span>
         </div>
       </div>
     );
@@ -35,19 +35,18 @@ function CompletionSummary() {
   const pct = Math.round((done / total) * 100);
 
   return (
-    <div className="rounded-2xl bg-white dark:bg-zinc-900 p-5 shadow-sm border border-zinc-100 dark:border-zinc-800">
-      <div className="text-xs text-zinc-400 dark:text-zinc-500 mb-1 font-medium">今日完成</div>
-      <div className="flex items-baseline gap-1">
-        <span className="text-3xl font-bold text-zinc-900 dark:text-zinc-100">{done}</span>
-        <span className="text-sm text-zinc-400 dark:text-zinc-500">/ {total}</span>
+    <div className="bg-white dark:bg-zinc-900 rounded-2xl px-6 py-5 shadow-[0_1px_3px_rgba(0,0,0,0.06)]">
+      <div className="text-[13px] text-zinc-400 dark:text-zinc-500 font-medium tracking-[0.02em]">今日完成</div>
+      <div className="mt-1.5 flex items-baseline gap-1">
+        <span className="text-[32px] font-bold text-zinc-900 dark:text-zinc-100 leading-none tabular-nums">{done}</span>
+        <span className="text-sm text-zinc-400 dark:text-zinc-500 font-medium">/ {total}</span>
       </div>
-      <div className="mt-2 h-1.5 bg-zinc-100 dark:bg-zinc-800 rounded-full overflow-hidden">
+      <div className="mt-3 h-[3px] bg-zinc-100 dark:bg-zinc-800 rounded-full overflow-hidden">
         <div
-          className="h-full bg-gradient-to-r from-violet-400 to-fuchsia-400 rounded-full transition-all duration-500"
+          className="h-full bg-zinc-900 dark:bg-zinc-100 rounded-full transition-all duration-500"
           style={{ width: `${pct}%` }}
         />
       </div>
-      <div className="mt-0.5 text-xs text-zinc-400">{pct}%</div>
     </div>
   );
 }

@@ -3,12 +3,12 @@ import { useApp } from '../context/AppContext';
 
 function dayStatus(date: string, log: unknown): 'full' | 'partial' | 'none' {
   if (!log) return 'none';
-  const l = log as { phaseCompletions?: Record<string, boolean>; fixedCompletions?: Record<string, boolean> };
-  const allTasks = { ...(l.phaseCompletions ?? {}), ...(l.fixedCompletions ?? {}) };
-  const entries = Object.values(allTasks);
-  if (entries.length === 0) return 'none';
-  const done = entries.filter(Boolean).length;
-  if (done === entries.length) return 'full';
+  const l = log as Record<string, Record<string, boolean>>;
+  const all = { ...(l.phaseCompletions ?? {}), ...(l.fixedCompletions ?? {}) };
+  const vals = Object.values(all);
+  if (vals.length === 0) return 'none';
+  const done = vals.filter(Boolean).length;
+  if (done === vals.length) return 'full';
   if (done > 0) return 'partial';
   return 'none';
 }
@@ -20,26 +20,25 @@ export default function WeekGrid() {
   const days = getLast7Days();
 
   return (
-    <div className="rounded-2xl bg-white dark:bg-zinc-900 p-5 shadow-sm border border-zinc-100 dark:border-zinc-800">
-      <div className="text-xs text-zinc-400 dark:text-zinc-500 mb-3 font-medium">最近七天</div>
+    <div className="bg-white dark:bg-zinc-900 rounded-2xl px-6 py-5 shadow-[0_1px_3px_rgba(0,0,0,0.06)]">
+      <div className="text-[13px] text-zinc-400 dark:text-zinc-500 font-medium tracking-[0.02em] mb-4">最近七天</div>
       <div className="flex justify-between">
         {days.map((d) => {
           const status = dayStatus(d, data.dailyLogs[d]);
           const date = new Date(d + 'T12:00:00');
-          const weekday = date.getDay();
-          const dayNum = date.getDate();
-          const color =
-            status === 'full'
-              ? 'bg-emerald-400'
-              : status === 'partial'
-              ? 'bg-amber-400'
-              : 'bg-zinc-100 dark:bg-zinc-800';
-          const textColor = status !== 'none' ? 'text-white' : 'text-zinc-400 dark:text-zinc-500';
           return (
-            <div key={d} className="flex flex-col items-center gap-1">
-              <span className="text-[10px] text-zinc-400 dark:text-zinc-500">{WEEKDAYS[weekday]}</span>
-              <div className={`w-9 h-9 rounded-xl flex items-center justify-center ${color} transition-colors`}>
-                <span className={`text-xs font-semibold ${textColor}`}>{dayNum}</span>
+            <div key={d} className="flex flex-col items-center gap-1.5">
+              <span className="text-[12px] text-zinc-400 dark:text-zinc-500 font-medium">{WEEKDAYS[date.getDay()]}</span>
+              <div className={`w-[36px] h-[36px] rounded-xl flex items-center justify-center transition-colors ${
+                status === 'full' ? 'bg-zinc-900 dark:bg-zinc-100' :
+                status === 'partial' ? 'bg-zinc-300 dark:bg-zinc-600' :
+                'bg-zinc-100 dark:bg-zinc-800'
+              }`}>
+                <span className={`text-sm font-semibold ${
+                  status !== 'none' ? 'text-white dark:text-zinc-900' : 'text-zinc-400 dark:text-zinc-600'
+                }`}>
+                  {date.getDate()}
+                </span>
               </div>
             </div>
           );
